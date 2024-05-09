@@ -1,11 +1,11 @@
 from fastapi import FastAPI, HTTPException
-from . import crud, models, schemas
+from . import crud, schemas
 from sqlalchemy.orm import Session
 from .db import SessionLocal
 from fastapi import Depends
 from .auth.auth import auth_backend
 from .auth.schemas import UserRead, UserCreate
-from .auth.database import User
+from src.auth.models import User
 from .auth.manager import get_user_manager
 from fastapi_users import FastAPIUsers
 

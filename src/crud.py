@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+from . import schemas
+from .auth import models
 
 
 def get_users(db: Session, limit):

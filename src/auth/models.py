@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Boolean, Integer, String, func, Numeric, TIMESTAMP
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase, SQLAlchemyBaseUserTable
 
 
 class BaseModel(DeclarativeBase):
@@ -12,7 +13,7 @@ class BaseModel(DeclarativeBase):
         return "<{0.__class__.__name__}(id={0.id!r})>".format(self)
 
 
-class User(BaseModel):
+class User(SQLAlchemyBaseUserTable[int], BaseModel):
     """User model"""
     __tablename__ = 'user'
 

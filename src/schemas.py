@@ -2,11 +2,18 @@ from pydantic import BaseModel
 from datetime import datetime
 
 
-class Employee(BaseModel):
-    id: int
+class User(BaseModel):
     first_name: str
     last_name: str
-    login: str
-    password: str
+    username: str
     salary: float
     promotion_date: datetime
+    email: str
+    hashed_password: str
+    is_active: bool
+    is_superuser: bool
+    is_verified: bool
+
+class AllUsers(User):
+    id: int
+

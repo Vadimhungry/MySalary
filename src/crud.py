@@ -2,49 +2,53 @@ from sqlalchemy.orm import Session
 from . import models, schemas
 
 
-def get_employees(db: Session, limit):
-    return db.query(models.Employee).all()[:limit]
+def get_users(db: Session, limit):
+    return db.query(models.User).all()[:limit]
 
 
-def create_employee(db: Session, employee: schemas.Employee):
-    db_employee = models.Employee(
-        first_name=employee.first_name,
-        login=employee.login,
-        last_name=employee.last_name,
-        password=employee.password,
-        salary=employee.salary,
-        promotion_date=employee.promotion_date
-    )
-    db.add(db_employee)
+# def create_employee(db: Session, employee: schemas.User):
+#     db_employee = models.User(
+#         first_name=employee.first_name,
+#         last_name=employee.last_name,
+#         login=employee.login,
+#         salary=employee.salary,
+#         promotion_date=employee.promotion_date,
+#         email=employee.email,
+#         hashed_password=employee.hashed_password,
+#         is_active=employee.is_active,
+#         is_superuser=employee.is_superuser,
+#         is_verified=employee.is_verified
+#     )
+#     db.add(db_employee)
+#     db.commit()
+#     db.refresh(db_employee)
+#     return db_employee
+
+def get_employee_by_username(db: Session, username: str):
+    return db.query(models.User).filter(models.User.username == username).first()
+
+
+def get_user_by_id(db: Session, id: int):
+    return db.query(models.User).filter(models.User.id == id).first()
+
+
+def update_user(db: Session, id: int, user_data: schemas.User):
+    db_employee = db.query(models.User).filter(models.User.id == id).first()
+
+    db_employee.first_name = user_data.first_name
+    db_employee.last_name = user_data.last_name
+    db_employee.username = user_data.username
+    db_employee.password = user_data.password
+    db_employee.salary = user_data.salary
+    db_employee.promotion_date = user_data.promotion_date
+
     db.commit()
     db.refresh(db_employee)
-    return db_employee
-
-def get_employee_by_login(db: Session, login: str):
-    return db.query(models.Employee).filter(models.Employee.login == login).first()
-
-
-def get_employee_by_id(db: Session, id: int):
-    return db.query(models.Employee).filter(models.Employee.id == id).first()
-
-
-def update_employee(db: Session, id: int, employee_data: schemas.Employee):
-    db_employee = db.query(models.Employee).filter(models.Employee.id == id).first()
-
-    db_employee.first_name = employee_data.first_name
-    db_employee.last_name = employee_data.last_name
-    db_employee.login = employee_data.login
-    db_employee.password = employee_data.password
-    db_employee.salary = employee_data.salary
-    db_employee.promotion_date = employee_data.promotion_date
-
-    db.commit()
-    db.refresh(db_employee)
 
     return db_employee
 
 
-def delete_employee(db, db_employee):
+def delete_user(db, db_employee):
     db.delete(db_employee)
     db.commit()
     return db_employee

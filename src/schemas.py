@@ -14,6 +14,6 @@ class User(BaseModel):
     is_superuser: bool
     is_verified: bool
 
+
 class AllUsers(User):
     id: int
-

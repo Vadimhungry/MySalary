@@ -1,37 +1,17 @@
 from typing import AsyncGenerator
 from fastapi import Depends
-from fastapi_users.db import SQLAlchemyUserDatabase
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
+from sqlalchemy.ext.asyncio import (
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine
+)
 from src.auth.models import User
-
-DATABASE_URL = "postgresql+asyncpg://postgres:password@localhost:5432/main_backend"
-
-
-# class Base(DeclarativeBase):
-#     pass
+import os
 
 
-# class User(SQLAlchemyBaseUserTable[int], Base):
-#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-#     first_name: Mapped[str] = mapped_column(String(length=255), nullable=False)
-#     last_name: Mapped[str] = mapped_column(String(length=255), nullable=False)
-#     username: Mapped[str] = mapped_column(String(length=255), nullable=False, unique=True)
-#     salary: Mapped[Numeric] = mapped_column(Numeric(precision=10, scale=2))
-#     promotion_date: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
-#
-#     email: Mapped[str] = mapped_column(
-#         String(length=320), unique=True, index=True, nullable=False
-#     )
-#     hashed_password: Mapped[str] = mapped_column(
-#         String(length=1024), nullable=False
-#     )
-#     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
-#     is_superuser: Mapped[bool] = mapped_column(
-#         Boolean, default=False, nullable=False
-#     )
-#     is_verified: Mapped[bool] = mapped_column(
-#         Boolean, default=False, nullable=False
-#     )
+# todo брать из окружения
+DATABASE_URL = os.getenv('DB_LINK')
 
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)

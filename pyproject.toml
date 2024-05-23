@@ -18,6 +18,9 @@ asyncpg = "^0.29.0"
 alembic = "^1.13.1"
 pydantic = "^2.7.1"
 fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
+fastapi-users-db-sqlalchemy = "^6.0.1"
+flake8 = "^7.0.0"
+python-dotenv = "^1.0.1"
 
 
 [build-system]

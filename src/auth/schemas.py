@@ -1,8 +1,8 @@
 from fastapi_users import schemas
-from sqlalchemy import Boolean, ForeignKey, Integer, String, func, select, Numeric, TIMESTAMP
 from pydantic import EmailStr
 from typing import Optional
 import datetime
+
 
 class UserRead(schemas.BaseUser[int]):
     id: int
@@ -29,6 +29,7 @@ class UserCreate(schemas.BaseUserCreate):
     is_active: Optional[bool] = True
     is_superuser: Optional[bool] = False
     is_verified: Optional[bool] = False
+
     class Config:
         arbitrary_types_allowed = True
 

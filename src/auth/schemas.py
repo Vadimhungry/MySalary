@@ -11,8 +11,6 @@ class UserRead(schemas.BaseUser[int]):
     is_superuser: bool = False
     is_verified: bool = False
 
-    username: str
-
     class Config:
         from_attributes = True
 
@@ -20,7 +18,6 @@ class UserRead(schemas.BaseUser[int]):
 class UserCreate(schemas.BaseUserCreate):
     first_name: str
     last_name: str
-    username: str
     salary: float
     promotion_date: Optional[datetime.date]
 

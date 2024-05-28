@@ -30,15 +30,6 @@ async def get_user_by_id(db: Session, id: int):
 #     return db_employee
 
 
-# async def delete_user(db, db_employee):
-#     await db.delete(db_employee)
-#     db.commit()
-#     return db_employee
-
-# async def delete_user(db: Session, db_employee: models.User):
-#     await db.delete(db_employee)
-#     await db.commit()
-
 async def delete_user(db: Session, db_user: models.User):
     await db.delete(db_user)
     await db.commit()

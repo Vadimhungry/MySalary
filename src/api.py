@@ -68,6 +68,7 @@ async def get_user(id: int, db: Session = Depends(get_db)):
     return user
 
 
-@app.get("/protected-route")
+@app.get("/my-salary")
 def protected_route(user: User = Depends(current_active_user)):
-    return f"Hello, {user.email}"
+    return (f"Your salary: {user.salary}\n"
+            f"Your promotion date: {user.promotion_date}")

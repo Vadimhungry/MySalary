@@ -43,11 +43,6 @@ class User(SQLAlchemyBaseUserTable[int], BaseModel):
         String(length=255),
         nullable=False
     )
-    username: Mapped[str] = mapped_column(
-        String(length=255),
-        nullable=False,
-        unique=True
-    )
 
     salary: Mapped[Numeric] = mapped_column(Numeric(precision=10, scale=2))
     promotion_date: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)

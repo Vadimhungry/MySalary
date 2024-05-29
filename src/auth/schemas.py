@@ -11,8 +11,9 @@ class UserRead(schemas.BaseUser[int]):
     is_superuser: bool = False
     is_verified: bool = False
 
-    class Config:
-        from_attributes = True
+    model_config = {
+        "arbitrary_types_allowed": True
+    }
 
 
 class UserCreate(schemas.BaseUserCreate):
@@ -27,8 +28,9 @@ class UserCreate(schemas.BaseUserCreate):
     is_superuser: Optional[bool] = False
     is_verified: Optional[bool] = False
 
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = {
+        "arbitrary_types_allowed": True
+    }
 
 
 class UserUpdate(schemas.BaseUserUpdate):

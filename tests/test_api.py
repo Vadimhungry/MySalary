@@ -11,6 +11,7 @@ from fastapi import Depends
 import pytest
 from httpx import AsyncClient
 from httpx import ASGITransport
+from src.db import get_async_session
 
 
 DATABASE_URL = "sqlite+aiosqlite:///./test.db"
@@ -42,11 +43,16 @@ async def async_client():
     ) as client:
         yield client
 
+
 @pytest.fixture
 async def setup_db():
+    # Create the tables before each test
     async with engine.begin() as conn:
         await conn.run_sync(BaseModel.metadata.create_all)
-    yield
+
+    yield  # Run the test
+
+    # Drop the tables after each test
     async with engine.begin() as conn:
         await conn.run_sync(BaseModel.metadata.drop_all)
 
@@ -57,12 +63,12 @@ async def test_login_user(async_client, setup_db):
     register_response = await async_client.post(
         "/auth/register",
         json={
-            "first_name": "zabn51pokjbvzmajrmvovo",
-            "last_name": "zabn51pokjbvzmajrmvova",
+            "first_name": "xgh1mzabn51pokjbvzmajrmvovo",
+            "last_name": "xgh1mzabn51pokjbvzmajrmvova",
             "salary": 1000.50,
             "promotion_date": "2024-05-30",
-            "email": "zabn51pokjbvzmajrmvovi@example.com",
-            "password": "zabn51pokjbvzmajrmvove",
+            "email": "xgh1mzabn51pokjbvzmajrmvovi@example.com",
+            "password": "xgh1mzabn51pokjbvzmajrmvove",
             "is_active": True,
             "is_superuser": False,
             "is_verified": False
